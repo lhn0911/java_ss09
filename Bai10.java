@@ -25,10 +25,12 @@ class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    public void inputData(Scanner scanner) {
-        System.out.print("Nhap ID: ");
-        this.id = scanner.nextInt();
-        scanner.nextLine();
+    public void inputData(Scanner scanner, boolean allowIdInput) {
+        if (allowIdInput) {
+            System.out.print("Nhap ID: ");
+            this.id = scanner.nextInt();
+            scanner.nextLine();
+        }
         System.out.print("Nhap ten: ");
         this.name = scanner.nextLine();
         System.out.print("Nhap tuoi: ");
@@ -95,7 +97,7 @@ public class Bai10 {
             return;
         }
         Student newStudent = new Student();
-        newStudent.inputData(scanner);
+        newStudent.inputData(scanner, true);
         students[studentCount++] = newStudent;
     }
 
@@ -105,8 +107,8 @@ public class Bai10 {
         scanner.nextLine();
         for (int i = 0; i < studentCount; i++) {
             if (students[i].getId() == id) {
-                System.out.println("Nhap thong tin moi:");
-                students[i].inputData(scanner);
+                System.out.println("Nhap thong tin moi (ID khong thay doi):");
+                students[i].inputData(scanner, false);
                 return;
             }
         }
